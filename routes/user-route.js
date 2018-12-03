@@ -1,4 +1,4 @@
-var express= require('express');
+var express = require('express');
 
 var userCtrl = require('../controllers/userController');
 var auth = require('../middlewares/auth');

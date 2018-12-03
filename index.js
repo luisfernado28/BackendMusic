@@ -5,17 +5,17 @@ var userRoute = require('./routes/user-route');
 //var cors = require('cors');
 var app = express();
 
-const PORT = config.port || 3000
+const PORT = config.port || 3000;
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 //app.use(cors());
-app.get("/",(req,res)=>{
-    res.send({mensaje:"HOLa mundo"})
-})
+app.get("/", (req, res) => {
+    res.send({mensaje: "Hello world"})
+});
 // localhost:3000/usuario/insert
-app.use("/usuario",userRoute);
+app.use("/user", userRoute);
 
-app.listen(PORT,()=>{
-    console.log("Hitler will be back also here is your port "+ PORT)
-})
+app.listen(PORT, () => {
+    console.log("Listening on port: " + PORT)
+});

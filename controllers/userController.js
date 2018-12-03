@@ -15,18 +15,18 @@ function insertUser(req, res) {
         console.log(JSON.stringify(innerUser));
         res.send(innerUser);
     }, (err) => {
-        if (err){
+        if (err) {
             console.log(JSON.stringify(err));
             res.send(err);
         }
     });
 }
 
-function editUser(req, res){
+function editUser(req, res) {
     //TODO edit users
 }
 
-function deleteUser(req, res){
+function deleteUser(req, res) {
     //TODO delete users
 }
 
