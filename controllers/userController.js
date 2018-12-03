@@ -22,15 +22,30 @@ function insertUser(req, res) {
     });
 }
 
+function getOne(req,res){
+    User.findOne({username: req.body.username}, (err,user)=>{
+        if(err) return res.status(500).send({mensaje: err});
+        if(!user) return res.status(500).send({mensaje: "usuario no encontrado"});
+        res.status(200).send(user);
+    })
+}
+
+
+
 function editUser(req, res) {
     //TODO edit users
 }
 
 function deleteUser(req, res) {
-    //TODO delete users
+    User.remove({"_id" : req.query.id}, (err,user)=>{
+        if(err) return res.status(500).send({mensaje: err});
+        res.status(200).send({mensaje :"Usuario eliminado correctamente"})
+    })
 }
 
 module.exports = {
     getUsers,
-    insertUser
+    insertUser,
+    getOne,
+    deleteUser
 };

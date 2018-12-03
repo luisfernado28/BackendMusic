@@ -1,4 +1,4 @@
-module.exports = {
+module.exports={
     port: process.env.PORT,
-    SECRET_TOKEN: 'my_password'
-};
+    SECRET_TOKEN: 'mi_clave'
+}
