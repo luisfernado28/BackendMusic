@@ -3,7 +3,8 @@ let Schema = mongoose.Schema;
 mongoose.connect("mongodb://localhost/music");
 
 let playlist_scheme = new Schema({
-    song: [{id: String}]
+    name: String,
+    songs: [{id: String}]
 });
 
 let Playlist = mongoose.model("playlists", playlist_scheme);
