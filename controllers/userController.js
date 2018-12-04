@@ -45,10 +45,32 @@ function deleteUser(req, res) {
     })
 }
 
+function addPlaylist(req, res){
+    User.findOne({"_id": req.query.id}, (err, user) =>{
+        if(err) return res.status(500). send({message: err});
+        if(!user) return res.status(500).send({message: "user not found"});
+        user.playlists.push(req.query.playlist);
+        user.save();
+        res.status(200).send({message:"Playlist added succesfuly"})
+    })
+}
+
+function removePlaylist(req, res){
+    User.findOne({"_id": req.query.id},(err,user) => {
+        if(err) return res.status(500). send({message: err});
+        if(!user) return res.status(500).send({message: "user not found"});
+        user.playlists.pull(req.query.playlist);
+        user.save();
+        res.status(200).send({message :"Playlist removed succesfuly"})
+    })
+}
+
 module.exports = {
     getUsers,
     insertUser,
     getOne,
     deleteUser,
-    editUsername
+    editUsername,
+    addPlaylist,
+    removePlaylist
 };
