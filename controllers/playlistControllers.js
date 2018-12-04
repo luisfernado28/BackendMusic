@@ -46,17 +46,21 @@ function deletePlaylists(req,res) {
     })
 }
 
-function addSongPlaylist() {
-
+function addSongPlaylist(req,res) {
+    Playlist.updateOne({_id: req.query._id}, {$set: {$push: {playlists: req.body.id}}}, (err,playlists)=>{
+        if(err) return res.status(500).send({messaje:err});
+        if(!playlists) return res.status(500).send({messaje:"song not found"});
+        res.status(200).send({messaje:"song add correctly"})
+    });
 }
 
-function editSongPlaylist() {
-
+function deleteSongPlaylist(req,res) {
+    Playlist.updateOne({_id: req.query._id}, {$set: {$pull: {playlists: req.body.id}}}, (err,playlists)=>{
+        if(err) return res.status(500).send({messaje:err});
+        if(!playlists) return res.status(500).send({messaje:"song not found"});
+        res.status(200).send({messaje:"song delete correctly"})
+    });
 }
-
-function deleteSongPlaylist() {
-
-};
 
 module.exports ={
   getPlaylists,
@@ -65,6 +69,5 @@ module.exports ={
   insertPlaylists,
   deletePlaylists,
   addSongPlaylist,
-  editSongPlaylist,
   deleteSongPlaylist
 };
