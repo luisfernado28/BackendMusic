@@ -8,7 +8,7 @@ api.get("/all", userCtrl.getUsers);
 api.post('/ins', userCtrl.insertUser);
 api.get("/getone", userCtrl.getOne);
 api.delete("/del", userCtrl.deleteUser);
-api.put("/edit", userCtrl.editUser);
+api.put("/edit", userCtrl.editUsername);
 
 module.exports = api;
 

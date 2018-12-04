@@ -30,20 +30,16 @@ function getOne(req,res){
     })
 }
 
-
-
-function editUser(req, res) {
-    User.update({"_id": req.query.id }, {username: req.body.username, playlists: req.body.playlists}, (err,user)=>{
+function editUsername(req, res) {
+    User.updateOne({"_id": req.query.id },{ $set:{ username: req.body.username} }, (err,user)=>{
         if(err) return res.status(500).send({message: err});
         if(!user) return res.status(500).send({message: "user not found"});
         res.status(200).send({message: "User edited correctly"})
-
     })
-
 }
 
 function deleteUser(req, res) {
-    User.remove({"_id" : req.query.id}, (err,user)=>{
+    User.deleteOne({"_id" : req.query.id}, (err,user)=>{
         if(err) return res.status(500).send({mensaje: err});
         res.status(200).send({message :"user deleted"})
     })
@@ -54,5 +50,5 @@ module.exports = {
     insertUser,
     getOne,
     deleteUser,
-    editUser
+    editUsername
 };
