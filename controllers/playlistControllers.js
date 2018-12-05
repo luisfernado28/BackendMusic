@@ -1,6 +1,4 @@
-var Playlist = require('../models/playlistModel');
-
-var service = require('../services/authService');
+var Playlist = require('../models/playlistModel').Playlist;
 
 function getPlaylists(req,res) {
     Playlist.find({},(err,playlists)=>{
@@ -10,15 +8,15 @@ function getPlaylists(req,res) {
 }
 
 function getOnePlaylist(req,res) {
-    Playlist.findOne({"_id":req.query._id},(req,res)=>{
+    Playlist.findOne({"_id":req.query._id},(err,playlists)=>{
         if(err) return res.status(500).send({messaje:err});
         if(!playlists) return res.status(500).send({messaje: "Playlist not found"});
         res.status(200).send(playlists);
-    })
+    });
 }
 
 function insertPlaylists(req,res) {
-    let playlist = new Playlist({"id":req.body.id});
+    let playlist = new Playlist({"id":req.body.id, name: req.body.name});
     playlist.save().then((innerPlaylist) =>{
         console.log(JSON.stringify(innerPlaylist));
         res.send(innerPlaylist);
@@ -47,18 +45,18 @@ function deletePlaylists(req,res) {
 }
 
 function addSongPlaylist(req,res) {
-    Playlist.updateOne({_id: req.query._id}, {$set: {$push: {playlists: req.body.id}}}, (err,playlists)=>{
+    Playlist.updateOne({"_id": req.query._id}, {$push: {"songs": req.body.id}}, (err,playlists)=>{
         if(err) return res.status(500).send({messaje:err});
         if(!playlists) return res.status(500).send({messaje:"song not found"});
-        res.status(200).send({messaje:"song add correctly"})
+        res.status(200).send(playlists)
     });
 }
 
 function deleteSongPlaylist(req,res) {
-    Playlist.updateOne({_id: req.query._id}, {$set: {$pull: {playlists: req.body.id}}}, (err,playlists)=>{
+    Playlist.updateOne({_id: req.query._id}, {$pull: {songs: req.body.id}}, (err,playlists)=>{
         if(err) return res.status(500).send({messaje:err});
         if(!playlists) return res.status(500).send({messaje:"song not found"});
-        res.status(200).send({messaje:"song delete correctly"})
+        res.status(200).send({messaje:"song delete correctly"});
     });
 }
 

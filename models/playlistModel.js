@@ -4,7 +4,7 @@ mongoose.connect("mongodb://localhost/music");
 
 let playlist_scheme = new Schema({
     name: String,
-    songs: [{id: String}]
+    songs: [String]
 });
 
 let Playlist = mongoose.model("playlists", playlist_scheme);

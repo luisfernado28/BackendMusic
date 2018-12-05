@@ -8,7 +8,7 @@ let song_scheme = new Schema({
     artist: String,
     duration: Number,
     year: Number,
-    genre: Number,
+    genre: String,
     link: String
 });
 
