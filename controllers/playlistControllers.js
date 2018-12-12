@@ -15,6 +15,14 @@ function getOnePlaylist(req,res) {
     });
 }
 
+function getByName(req,res) {
+    Playlist.findOne({name: req.query.name},(err,playlists)=>{
+        if(err) return res.status(500).send({messaje:err});
+        if(!playlists) return res.status(500).send({messaje: "Playlist not found"});
+        res.status(200).send(playlists);
+    });
+}
+
 function insertPlaylists(req,res) {
     let playlist = new Playlist({"id":req.body.id, name: req.body.name});
     playlist.save().then((innerPlaylist) =>{
@@ -67,5 +75,6 @@ module.exports ={
   insertPlaylists,
   deletePlaylists,
   addSongPlaylist,
-  deleteSongPlaylist
+  deleteSongPlaylist,
+    getByName
 };
