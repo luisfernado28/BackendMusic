@@ -10,7 +10,7 @@ function getUsers(req, res) {
 }
 
 function insertUser(req, res) {
-    let user = new User({username: req.body.username, playlists: []});
+    let user = new User({username: req.body.username, discordid: req.body.discordid, playlists: []});
     user.save().then((innerUser) => {
         console.log(JSON.stringify(innerUser));
         res.send(innerUser);
@@ -31,7 +31,7 @@ function getOne(req,res){
 }
 
 function editUsername(req, res) {
-    User.updateOne({"_id": req.query.id },{ $set:{ username: req.body.username} }, (err,user)=>{
+    User.updateOne({"_id": req.query.id },{ $set:{ username: req.body.username, discordid: req.body.discordid} }, (err,user)=>{
         if(err) return res.status(500).send({message: err});
         if(!user) return res.status(500).send({message: "user not found"});
         res.status(200).send({message: "User edited correctly"})
