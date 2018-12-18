@@ -4,7 +4,8 @@ mongoose.connect("mongodb://localhost/music");
 
 var user_scheme = new Schema({
     username: String,
-    playlists: [{id: String}]
+    playlists: [{id: String}],
+    discordid: String
 });
 
 var User = mongoose.model("users", user_scheme);

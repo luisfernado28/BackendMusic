@@ -16,6 +16,7 @@ api.delete("/delplaylist", userCtrl.removePlaylist);
 
 api.put("/edit", userCtrl.editUsername);
 
+api.get("/getByDiscordid", userCtrl.getOneByDiscordid);
 
 module.exports = api;
 

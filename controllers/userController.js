@@ -65,6 +65,14 @@ function removePlaylist(req, res){
     })
 }
 
+function getOneByDiscordid(req,res){
+    User.findOne({"discordid": req.query.discordid}, (err,user)=>{
+        if(err) return res.status(500).send({message: err});
+        if(!user) return res.status(500).send({message: "user not found"});
+        res.status(200).send(user);
+    })
+}
+
 module.exports = {
     getUsers,
     insertUser,
@@ -72,5 +80,6 @@ module.exports = {
     deleteUser,
     editUsername,
     addPlaylist,
-    removePlaylist
+    removePlaylist,
+    getOneByDiscordid
 };
