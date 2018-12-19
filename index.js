@@ -5,10 +5,14 @@ var userRoute = require('./routes/user-route');
 var playlistRoute = require('./routes/playlist-routes');
 let songRoute = require('./routes/song-route');
 
-//var cors = require('cors');
+let cors = require('cors');
 var app = express();
 
 const PORT = config.port || 3000;
+
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
